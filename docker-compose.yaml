@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:7.4-apache
+    build: .
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 5000:80
+
+  database:
+    image: mysql:5.7.32
+    build:
+      ./src/database/dbconnect.php
+    container_name: mysql_database
+    restart: always
+    ports:
+      - 6603:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123123
+
+  app:
+    depends_on:
+      - database
+    container_name: phpmyadmin_client
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 3310:80
+    environment:
+      PMA_HOST: mysql_database
+#      MY_SQL_PASSWORD: 123123
+#      MY_ROOT_PASSWORD: 123123

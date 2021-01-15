@@ -1,0 +1,15 @@
+.color {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+
+}
+
+.color > input {
+  margin-right: -1.5em;
+
+}
+
+.color > label {
+  font-size:17px;
+}
